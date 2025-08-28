@@ -1,18 +1,75 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es" class="h-100" data-bs-theme="dark">
 <head>
-    <title>Formulario de Persona</title>
+  <meta charset="UTF-8">
+  <title>Formulario de Persona</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <style>
+    .header {
+      justify-content: space-evenly;
+    }
+    .header nav {
+      gap: 1rem;
+    }
+    .header nav a {
+      color: white !important;
+    }
+    .form-container {
+      max-width: 600px;
+      margin: 3rem auto;
+      background: #1c1c1c;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0px 0px 15px rgba(255,255,255,0.1);
+    }
+  </style>
 </head>
-<body>
-    <h1 th:text="${persona.id == null} ? 'Nueva Persona' : 'Editar Persona'"></h1>
-    <form th:action="@{/personas}" th:object="${persona}" method="post">
-        <input type="hidden" th:field="*{id}" />
-        <label>Nombre:</label>
-        <input type="text" th:field="*{nombre}" />
-        <label>Apellido:</label>
-        <input type="text" th:field="*{apellido}" />
-        <button type="submit">Guardar</button>
-    </form>
-    <a href="/personas">Volver a la lista</a>
+<body class="d-flex h-100 text-bg-dark flex-column">
+  <div class="cover-container w-100 p-3 mx-auto flex-column">
+    <!-- Header -->
+    <header class="mb-auto">
+      <div class="d-flex header">
+        <h3 class="mb-0">FERCHO</h3>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+          <a class="nav-link fw-bold py-1 px-0" href="/">Home</a>
+          <a class="nav-link fw-bold py-1 px-0" href="/personas">Lista de personas</a>
+          <a class="nav-link fw-bold py-1 px-0 active" href="/personas/nuevo">Registrar</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Formulario -->
+    <main>
+      <div class="form-container">
+        <h1 class="text-center mb-4" th:text="${persona.id == null} ? 'Nueva Persona' : 'Editar Persona'"></h1>
+
+        <form th:action="@{/personas}" th:object="${persona}" method="post">
+          <input type="hidden" th:field="*{id}" />
+
+          <div class="mb-3">
+            <label class="form-label">Nombre:</label>
+            <input type="text" class="form-control" th:field="*{nombre}" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Apellido:</label>
+            <input type="text" class="form-control" th:field="*{apellido}" />
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <a href="/personas" class="btn btn-secondary">Volver a la lista</a>
+            <button type="submit" class="btn btn-light fw-bold">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto text-white-50 text-center">
+      <p>CRUD con <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>.</p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
